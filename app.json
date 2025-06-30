@@ -52,6 +52,12 @@
     },
     "newArchEnabled": true,
     "name": "JellyKidsTV",
-    "slug": "JellyKidsTV"
+    "slug": "JellyKidsTV",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "b8e14037-5886-4882-95d0-40e65193dd7f"
+      }
+    }
   }
 }
