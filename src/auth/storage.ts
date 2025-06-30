@@ -7,7 +7,7 @@ const STORAGE_USER_ID = "userId";
 const STORAGE_HOST_URL = "hostUrl";
 const STORAGE_USER_NAME = "userName";
 
-const getSecureValue = async (key: string) => {
+export const getSecureValue = async (key: string) => {
   return Platform.OS === 'web'
     ? AsyncStorage.getItem(key)
     : SecureStore.getItemAsync(key);
@@ -19,7 +19,7 @@ const clearSecureValue = async (key: string) => {
     : SecureStore.deleteItemAsync(key);
 };
 
-const saveSecureValue = async (key: string, value: string) => {
+export const saveSecureValue = async (key: string, value: string) => {
   return Platform.OS === 'web'
     ? AsyncStorage.setItem(key, value)
     : SecureStore.setItemAsync(key, value);

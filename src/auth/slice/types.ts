@@ -24,3 +24,14 @@ export interface JellyfinLoginResponse { // partial item
   User: JellyfinUser
   AccessToken: string
 }
+
+export interface JellyfinQuickConnectState {
+  Authenticated: boolean;
+  Secret: string;
+  Code: string;
+  DeviceId: string;
+  DeviceName: string;
+  AppName: string;
+  AppVersion: string;
+  DateAdded: string;
+}

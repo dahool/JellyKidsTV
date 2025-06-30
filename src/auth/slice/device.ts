@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { DeviceInfo } from './types'
 
 const initialState: DeviceInfo = {
-  deviceName: 'Unknown',
-  deviceId: 'Unknown'
+  deviceName: null,
+  deviceId: null
 }
 
 const deviceSlice = createSlice({
