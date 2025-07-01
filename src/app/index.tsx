@@ -7,12 +7,11 @@ import { useDeviceInfo } from "../auth/hooks/useDeviceInfo"
 export default function Index() {
 
   useDeviceInfo()
-  
+
   const router = useRouter()
   const { loading, authenticated, credentials } = useSession()
   
   useEffect(() => {
-    console.log(credentials)
     if (!loading && !authenticated) {
       if (credentials.hostUrl) {
         router.replace('/login')

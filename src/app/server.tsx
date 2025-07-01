@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Platform } from 'react-native'
-import { discoverServers, DiscoveryInfo } from '../services/discovery'
+import { useServerDiscovery } from '../services/discovery'
 import { useLazyGetServerInfoQuery } from '../services/api/server'
 import { router } from 'expo-router'
 import { ActivityIndicator } from 'react-native'
@@ -9,29 +9,19 @@ import { getHost } from '../auth'
 
 export default function ServerDiscoveryScreen() {
   const [url, setUrl] = useState('')
-  const [servers, setServers] = useState<DiscoveryInfo[]>([])
-  const [loading, setLoading] = useState(false)
   const [isValidUrl, setIsValidUrl] = useState(true)
 
   const [triggerGetServerInfo, { data, isLoading, error }] = useLazyGetServerInfoQuery()
   const [isConnecting, setIsConnecting] = useState(false)
   const saveHost = useSaveHost()
-  
+  const { servers, loading } = useServerDiscovery()
+
   useEffect(() => {
-    const scan = async () => {
-      setLoading(true)
-      console.log("Start discover")
-      const discovered = await discoverServers()
-      console.log("End discover")
-      setServers(discovered)
-      setLoading(false)
-    }
     const getHostUrl = async () => {
       const h = await getHost()
-      if (h) setUrl(h);
+      if (h) setUrl(h)
     }
     getHostUrl()
-    scan()
   }, [])
 
   const validateUrl = (value: string) => {
@@ -111,7 +101,14 @@ export default function ServerDiscoveryScreen() {
 
           {/* Server List */}
           {loading ? (
-            <Text className="text-zinc-500 dark:text-zinc-400">Scanning the network…</Text>
+            <Text className="text-zinc-500 dark:text-zinc-400">
+              <ActivityIndicator size="small" color="#fff" />
+              Scanning the network…
+            </Text>
+          ) : servers.length === 0 ? (
+            <Text className="text-zinc-500 dark:text-zinc-400">
+              No servers found on the network.
+            </Text>
           ) : (
             <ScrollView className="space-y-3 max-h-60">
               {servers.map((server, index) => (
@@ -126,7 +123,9 @@ export default function ServerDiscoveryScreen() {
                   <Text className="text-base font-semibold text-zinc-800 dark:text-white">
                     {server.name}
                   </Text>
-                  <Text className="text-sm text-zinc-500 dark:text-zinc-300">{server.address}</Text>
+                  <Text className="text-sm text-zinc-500 dark:text-zinc-300">
+                    {server.address}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>

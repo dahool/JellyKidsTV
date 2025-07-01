@@ -2,20 +2,14 @@
   "expo": {
     "scheme": "routertv",
     "userInterfaceStyle": "automatic",
-    "isTV": true,
     "plugins": [
       [
         "@react-native-tvos/config-tv",
         {
-          "androidTVBanner": "./assets/tv_icons/icon-400x240.png",
+          "androidTVBanner": "./assets/images/icon-400x240.png",
           "appleTVImages": {
-            "icon": "./assets/tv_icons/icon-1280x768.png",
-            "iconSmall": "./assets/tv_icons/icon-400x240.png",
-            "iconSmall2x": "./assets/tv_icons/icon-800x480.png",
-            "topShelf": "./assets/tv_icons/icon-1920x720.png",
-            "topShelf2x": "./assets/tv_icons/icon-3840x1440.png",
-            "topShelfWide": "./assets/tv_icons/icon-2320x720.png",
-            "topShelfWide2x": "./assets/tv_icons/icon-4640x1440.png"
+            "icon": "./assets/images/icon.png",
+            "iconSmall": "./assets/images/icon-400x240.png"
           }
         }
       ],
@@ -44,7 +38,7 @@
     },
     "web": {
       "bundler": "metro",
-      "favicon": "./assets/images/favicon.png",
+      "favicon": "./assets/images/icon.png",
       "output": "static"
     },
     "experiments": {
